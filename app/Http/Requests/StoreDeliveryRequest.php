@@ -24,7 +24,6 @@ class StoreDeliveryRequest extends Request
     public function rules()
     {
         return [
-            'dipID'  => 'required',
             'name'   => 'required',
             'status' => 'required'
         ];

@@ -17,5 +17,6 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'api/v1'], function()
 {
+  Route::resource('/deliveries/vimeo', 'VimeoController');
   Route::resource('/deliveries', 'DeliveryController');
 });

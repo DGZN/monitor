@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDeliveriesTable extends Migration
+class UpdateVimeoTableWithDeliverIDField extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,8 @@ class CreateDeliveriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('deliveries', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('dipID');
-            $table->string('name');
-            $table->integer('status');
-            $table->timestamps();
+        Schema::table('vimeo', function (Blueprint $table) {
+            $table->string('deliveryID')->after('id');
         });
     }
 
@@ -28,6 +24,8 @@ class CreateDeliveriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('deliveries');
+        Schema::table('vimeo', function (Blueprint $table) {
+            $table->dropColumn('deliveryID');
+        });
     }
 }
