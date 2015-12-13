@@ -26,4 +26,24 @@ class Vimeo extends Model
    * @var array
    */
   protected $hidden = [];
+
+  /**
+   * Returns formatted genres.
+   *
+   * @return {string} void
+   */
+  public function genres()
+  {
+      return str_replace(',',', ', $this->genres);
+  }
+
+  /**
+   * Returns formatted tags.
+   *
+   * @return {string} void
+   */
+  public function tags()
+  {
+      return str_replace(',',', ', $this->tags);
+  }
 }

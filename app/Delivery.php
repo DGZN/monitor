@@ -46,9 +46,12 @@ class Delivery extends Model
   {
     switch ($this->status) {
       case '2':
-        return 'Uploading';
+        return 'Processing';
         break;
       case '3':
+        return 'Uploading';
+        break;
+      case '4':
         return 'Delivered';
         break;
       default:

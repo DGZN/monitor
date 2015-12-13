@@ -27,19 +27,35 @@
 @endsection
 
 @section('content')
-<div class="row">
-  <div class="col-md-12">
-    <div class="well delivery-details">
-      <div class="form-group col-md-6 delivery-details">
-        <h4>{{ $vimeo['name'] }}</h4>
-        <h5>{{ $vimeo['description'] }}</h5>
-        <h5><span> Renting: </span>{{ $vimeo['rentActive'] == 1 ? 'True' : 'False' }}</h5>
-        <h5><span> Renting Period: </span>{{ $vimeo['rentPeriod'] }}</h5>
-        <h5><span> Renting Price: </span>{{ $vimeo['rentPrice'] }}</h5>
-        <h5><span> Buying </span>{{ $vimeo['buyActive'] == 1 ? 'True' : 'False' }}</h5>
-        <h5><span> Buy Price: </span>{{ $vimeo['buyPrice'] }}</h5>
+  <div class="well delivery-details">
+    <div class="row">
+        <div class="form-group col-md-6 delivery-details">
+          <h3>{{ $vimeo['name'] }}</h3>
+          <hr>
+          <h5>{{ $vimeo['description'] }}</h5>
+          <hr>
+          <h5><span> Genres: </span>{{ $vimeo->genres() }}</h5>
+          <h5><span> Tags: </span>{{ $vimeo->tags() }}</h5>
+        </div>
+        <div class="form-group col-md-6 delivery-details">
+          <h3><br></h3>
+          <hr>
+          <h4><span>Featured</span> <br> {{ $vimeo['mainVideo'] }}</h4>
+          <h4><span>Trailer</span> <br> {{ $vimeo['trailerVideo'] }}</h4>
+          <h4><span>Poster</span> <br> {{ $vimeo['poster'] }}</h4>
+          <hr>
+          <h5><span> Renting: </span>{{ $vimeo['rentActive'] == 1 ? 'True' : 'False' }}</h5>
+          <h5><span> Renting Period: </span>{{ $vimeo['rentPeriod'] }}</h5>
+          <h5><span> Renting Price: </span>{{ $vimeo['rentPrice'] }}</h5>
+          <h5><span> Buying </span>{{ $vimeo['buyActive'] == 1 ? 'True' : 'False' }}</h5>
+          <h5><span> Buy Price: </span>{{ $vimeo['buyPrice'] }}</h5>
+        </div>
+        <div class="col-md-12">
+          <button type="submit" class="btn btn-primary pull-right" onclick="processDelivery({{$vimeo['deliveryID']}})">
+            <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span> Process
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 @endsection

@@ -42,10 +42,10 @@
                   </thead>
                   <tbody>
                     @for ($i = 0; $i < count($deliveries); $i++)
-                      <tr id="{{ 'row'.$i }}" onclick="viewDetails({{$deliveries[$i]->id}})" style="cursor: pointer;">
-                          <td>{{$deliveries[$i]->id}}</td>
-                          <td>{{$deliveries[$i]->dipID}}</td>
-                          <td>{{$deliveries[$i]->name}}</td>
+                      <tr id="{{ 'row'.$i }}" style="cursor: pointer;">
+                          <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$i+1}}</td>
+                          <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->dipID}}</td>
+                          <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->name}}</td>
                           <td>
                             {{$deliveries[$i]->getStatus()}}
                           </td>

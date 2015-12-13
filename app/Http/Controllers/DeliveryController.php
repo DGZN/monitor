@@ -74,7 +74,8 @@ class DeliveryController extends Controller
      */
     public function update(Request $request, $id)
     {
-      return (new Delivery)->update($request->all());
+      $delivery = (new Delivery)->find($id)->update($request->all());
+      dd('Delivery', $delivery);
     }
 
     /**

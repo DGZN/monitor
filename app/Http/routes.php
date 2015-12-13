@@ -37,6 +37,6 @@ Route::get('deliveries', function(){
 Route::get('deliveries/{id}', function($id){
   $delivery = App\Delivery::find($id);
   return view('deliveries.details', [
-    'vimeo' => $delivery->vimeo->toArray()
+    'vimeo' => $delivery->vimeo
   ]);
 });
