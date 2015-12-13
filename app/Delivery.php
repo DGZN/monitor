@@ -26,4 +26,34 @@ class Delivery extends Model
    * @var array
    */
   protected $hidden = [];
+
+  /**
+   * Returns delivery object.
+   *
+   * @return {string} void
+   */
+  public function vimeo()
+  {
+      return $this->hasOne('App\Vimeo', 'deliveryID', 'id');
+  }
+
+  /**
+   * Returns delivery status.
+   *
+   * @return {string} void
+   */
+  public function getStatus()
+  {
+    switch ($this->status) {
+      case '2':
+        return 'Uploading';
+        break;
+      case '3':
+        return 'Delivered';
+        break;
+      default:
+        return 'Pending';
+        break;
+    }
+  }
 }
