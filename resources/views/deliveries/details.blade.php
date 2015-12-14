@@ -30,7 +30,7 @@
   <div class="well delivery-details">
     <div class="row">
         <div class="form-group col-md-6 delivery-details">
-          <h3>{{ $delivery->vimeo['name'] }} <small>{{ $delivery->getStatus() }}</small></h3>
+          <h3>{{ $delivery->vimeo['name'] }} <small>{{ $delivery->getStatus() }}</small> <small class="text-primary"> {{ $delivery->progress }} </small></h3>
           <hr>
           <h5>{{ $delivery->vimeo['description'] }}</h5>
           <hr>

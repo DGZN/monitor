@@ -36,6 +36,7 @@
                       <th>Package ID</th>
                       <th>Name</th>
                       <th>Status</th>
+                      <th>Progress</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
@@ -48,6 +49,7 @@
                           <td>
                             {{$deliveries[$i]->getStatus()}}
                           </td>
+                          <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->progress}}</td>
                           <td>
                               <i class="remove-icon"
                                  onclick="removeItem(this)"
@@ -126,6 +128,7 @@ $(function(){
                 <td onclick="viewDetails('+delivery.id+')">'+delivery.dipID+'</td>   \
                 <td onclick="viewDetails('+delivery.id+')">'+delivery.name+'</td>    \
                 <td>'+status+'</td>                                                  \
+                <td onclick="viewDetails('+delivery.id+')">'+delivery.progress+'</td>    \
                 <td>                                                                 \
                     <i class="remove-icon" onclick="removeItem(this)" data-row="row2" data-id="'+delivery.id+'" data-resource="deliveries"></i> \
                 </td>                                                                \
