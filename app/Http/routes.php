@@ -39,7 +39,7 @@ Route::get('deliveries/{id}', function($id){
   $delivery = App\Delivery::find($id);
   $events = [];
   if (!is_null($delivery->event)) {
-      $events = $delivery->event->all()->toArray();
+      $events = $delivery->event->toArray();
   }
   return view('deliveries.details', [
     'delivery' => $delivery,

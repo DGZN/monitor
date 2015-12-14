@@ -54,7 +54,7 @@ class Delivery extends Model
    */
   public function event()
   {
-      return $this->hasOne('App\Event', 'deliveryID', 'id');
+      return $this->hasMany('App\Event', 'deliveryID', 'id');
   }
 
   /**
