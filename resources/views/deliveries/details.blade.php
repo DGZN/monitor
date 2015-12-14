@@ -79,7 +79,9 @@
                     {{ $event['message'] }}
                 </li>
               @else
-                <li class="list-group-item">{{ $event['message'] }}</li>
+                @if (!isset($payload->progress))
+                  <li class="list-group-item">{{ $event['message'] }}</li>
+                @endif
               @endif
             @endforeach
           </ul>
