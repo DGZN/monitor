@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'api/v1'], function()
 {
   Route::resource('/deliveries/vimeo', 'VimeoController');
+  Route::resource('/deliveries/events', 'EventController');
   Route::resource('/deliveries', 'DeliveryController');
 });
 
@@ -36,7 +37,12 @@ Route::get('deliveries', function(){
 
 Route::get('deliveries/{id}', function($id){
   $delivery = App\Delivery::find($id);
+  $events = [];
+  if (!is_null($delivery->event)) {
+      $events = $delivery->event->all()->toArray();
+  }
   return view('deliveries.details', [
-    'vimeo' => $delivery->vimeo
+    'delivery' => $delivery,
+    'events'   => $events
   ]);
 });

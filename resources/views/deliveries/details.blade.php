@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Giant Approval Site Admin Details')
+@section('title', 'Giant Vimeo Deliver Dashboard')
 
 @section('navbar')
 <div class="container-fluid">
@@ -30,30 +30,42 @@
   <div class="well delivery-details">
     <div class="row">
         <div class="form-group col-md-6 delivery-details">
-          <h3>{{ $vimeo['name'] }}</h3>
+          <h3>{{ $delivery->vimeo['name'] }} <small>{{ $delivery->getStatus() }}</small></h3>
           <hr>
-          <h5>{{ $vimeo['description'] }}</h5>
+          <h5>{{ $delivery->vimeo['description'] }}</h5>
           <hr>
-          <h5><span> Genres: </span>{{ $vimeo->genres() }}</h5>
-          <h5><span> Tags: </span>{{ $vimeo->tags() }}</h5>
+          <div class="col-md-6">
+              <h4><span>Genres </span> <br> {{ $delivery->vimeo->genres() }}</h4>
+              <h4><span>Tags </span> <br> {{ $delivery->vimeo->tags() }}</h4>
+              <h4><span>Featured</span> <br> {{ $delivery->vimeo['mainVideo'] }}</h4>
+              <h4><span>Trailer</span> <br> {{ $delivery->vimeo['trailerVideo'] }}</h4>
+              <h4><span>Poster</span> <br> {{ $delivery->vimeo['poster'] }}</h4>
+          </div>
+          <div class="col-md-6">
+            <h4><span> Renting </span> <br> {{ $delivery->vimeo['rentActive'] == 1 ? 'True' : 'False' }}</h4>
+            <h4><span> Renting Period </span> <br> {{ $delivery->vimeo['rentPeriod'] }}</h4>
+            <h4><span> Renting Price </span> <br> {{ $delivery->vimeo['rentPrice'] }}</h4>
+            <h4><span> Buying </span> <br> {{ $delivery->vimeo['buyActive'] == 1 ? 'True' : 'False' }}</h4>
+            <h4><span> Buy Price: </span> <br> {{ $delivery->vimeo['buyPrice'] }}</h4>
+          </div>
         </div>
         <div class="form-group col-md-6 delivery-details">
-          <h3><br></h3>
+          <h3>
+            Events
+          </h3>
           <hr>
-          <h4><span>Featured</span> <br> {{ $vimeo['mainVideo'] }}</h4>
-          <h4><span>Trailer</span> <br> {{ $vimeo['trailerVideo'] }}</h4>
-          <h4><span>Poster</span> <br> {{ $vimeo['poster'] }}</h4>
-          <hr>
-          <h5><span> Renting: </span>{{ $vimeo['rentActive'] == 1 ? 'True' : 'False' }}</h5>
-          <h5><span> Renting Period: </span>{{ $vimeo['rentPeriod'] }}</h5>
-          <h5><span> Renting Price: </span>{{ $vimeo['rentPrice'] }}</h5>
-          <h5><span> Buying </span>{{ $vimeo['buyActive'] == 1 ? 'True' : 'False' }}</h5>
-          <h5><span> Buy Price: </span>{{ $vimeo['buyPrice'] }}</h5>
+          <ul class="list-group event-list">
+            @foreach ($events as $event)
+              <li class="list-group-item">{{ $event['message'] }}</li>
+            @endforeach
+          </ul>
         </div>
         <div class="col-md-12">
-          <button type="submit" class="btn btn-primary pull-right" onclick="processDelivery({{$vimeo['deliveryID']}})">
-            <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span> Process
-          </button>
+            @if ($delivery->getStatus() == 'Pending')
+              <button type="submit" class="btn btn-primary pull-right" onclick="processDelivery({{$delivery->vimeo['deliveryID']}})">
+                <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span> Process
+              </button>
+            @endif
         </div>
       </div>
     </div>

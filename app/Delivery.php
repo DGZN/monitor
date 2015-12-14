@@ -28,13 +28,56 @@ class Delivery extends Model
   protected $hidden = [];
 
   /**
-   * Returns delivery object.
+   * Returns delivery by dipID.
+   *
+   * @return {string} void
+   */
+  public function byDipId($id)
+  {
+      return $this::where('dipID', '=', $id)->first();
+  }
+
+  /**
+   * Returns vimeo object.
    *
    * @return {string} void
    */
   public function vimeo()
   {
       return $this->hasOne('App\Vimeo', 'deliveryID', 'id');
+  }
+
+  /**
+   * Returns event object.
+   *
+   * @return {string} void
+   */
+  public function event()
+  {
+      return $this->hasOne('App\Event', 'deliveryID', 'id');
+  }
+
+  /**
+   * Returns delivery class.
+   *
+   * @return {string} void
+   */
+  public function getClass()
+  {
+    switch ($this->status) {
+      case '2':
+        return '';
+        break;
+      case '3':
+        return 'bg-info';
+        break;
+      case '4':
+        return 'bg-success';
+        break;
+      default:
+        return 'Pending';
+        break;
+    }
   }
 
   /**

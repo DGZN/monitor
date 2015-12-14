@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Giant Approval Site Admin Dashboard')
+@section('title', 'Giant Vimeo Deliver Dashboard')
 
 @section('navbar')
 <div class="container-fluid">
@@ -40,9 +40,9 @@
                       <th>Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="deliveries-body">
                     @for ($i = 0; $i < count($deliveries); $i++)
-                      <tr id="{{ 'row'.$i }}" style="cursor: pointer;">
+                      <tr id="{{ 'row'.$i }}" style="cursor: pointer;" class="{{ $deliveries[$i]->getClass() }}">
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$i+1}}</td>
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->dipID}}</td>
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->name}}</td>
@@ -97,6 +97,61 @@
 
 @section('scripts')
 <script style="text/javascript">
-
+$(function(){
+  function pollDeliveries(){
+    $.ajax({
+      url: url + '/api/v1/deliveries/',
+      success: function(data){
+        var i=1;
+        var rows = []
+        rows = data.map(function(delivery){
+          switch (delivery.status) {
+            case 2:
+                var status = 'Processing'
+              break;
+            case 3:
+                var status = 'Uploading'
+                var className = 'bg-info'
+              break;
+            case 4:
+                var status = 'Delivered'
+                var className = 'bg-success'
+              break;
+            default:
+                var status = 'Pending'
+                var className = ''
+              break;
+          }
+          return '<tr id="row2" style="cursor: pointer;" class="'+ className +'">    \
+                <td onclick="viewDetails('+delivery.id+')">'+i+'</td>                \
+                <td onclick="viewDetails('+delivery.id+')">'+delivery.dipID+'</td>   \
+                <td onclick="viewDetails('+delivery.id+')">'+delivery.name+'</td>    \
+                <td>'+status+'</td>                                                  \
+                <td>                                                                 \
+                    <i class="remove-icon" onclick="removeItem(this)" data-row="row2" data-id="'+delivery.id+'" data-resource="deliveries"></i> \
+                </td>                                                                \
+            </tr>'
+          i++
+        })
+        $('#deliveries-body').html(rows)
+      },
+      dataType: 'JSON'
+    });
+  }
+  setInterval(pollDeliveries, 1000)
+  /*
+  <tr id="row2" style="cursor: pointer;" class="bg-success">
+      <td onclick="viewDetails(171)">3</td>
+      <td onclick="viewDetails(171)">DGZN-Vimeo-Delivery03</td>
+      <td onclick="viewDetails(171)">Yet Another Test 1</td>
+      <td>
+        Delivered
+      </td>
+      <td>
+          <i class="remove-icon" onclick="removeItem(this)" data-row="row2" data-id="171" data-resource="deliveries"></i>
+      </td>
+  </tr>
+  */
+})
 </script>
 @endsection

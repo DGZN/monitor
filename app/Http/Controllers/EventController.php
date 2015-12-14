@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Input;
+use App\Event;
 use App\Delivery;
-use App\Vimeo;
+
 use App\Http\Requests;
-use App\Http\Requests\StoreDeliveryRequest;
 use App\Http\Controllers\Controller;
 
-class DeliveryController extends Controller
+class EventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +19,7 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        return Delivery::all();
+        //
     }
 
     /**
@@ -39,9 +38,18 @@ class DeliveryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreDeliveryRequest $request)
+    public function store(Request $request)
     {
-        return Delivery::create($request->all());
+        $event = $request->get('event');
+        $delivery = (new Delivery)->byDipId($event['dipID']);
+        if ($delivery) {
+            $event = new Event([
+                'message' => $event['payload']['message'],
+                'payload' => json_encode($event['payload'])
+            ]);
+            $delivery->event()->save($event);
+        }
+        return $delivery;
     }
 
     /**
@@ -52,7 +60,7 @@ class DeliveryController extends Controller
      */
     public function show($id)
     {
-        return Delivery::find($id);
+        //
     }
 
     /**
@@ -75,8 +83,7 @@ class DeliveryController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $delivery = (new Delivery)->find($id)->update($request->all());
-      return Delivery::find($id);
+        //
     }
 
     /**
@@ -87,12 +94,6 @@ class DeliveryController extends Controller
      */
     public function destroy($id)
     {
-        $delivery = (new Delivery)->find($id);
-        if (!$delivery) {
-            return;
-        }
-        $vimeo    = $delivery->vimeo;
-        Vimeo::destroy($vimeo['id']);
-        return Delivery::destroy($delivery['id']);
+        //
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Vimeo;
 use App\Delivery;
 use App\Http\Requests;
+use App\Http\Requests\StoreVimeoRequest;
 use App\Http\Controllers\Controller;
 
 class VimeoController extends Controller
@@ -37,16 +38,17 @@ class VimeoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreVimeoRequest $request)
     {
-        $values = $this->getFieldValues(array_dot($request->all()));
-        $delivery = Delivery::create([
-          'dipID'  => $values['id'],
-          'name'   => $values['name'],
-          'status' => 0
+        $values = $this->getFieldValues($request->all());
+        $delivery = Delivery::firstOrCreate([
+            'dipID' => $values['id'],
+            'name'  => $values['name']
         ]);
-        $values['deliveryID'] = $delivery->toArray()['id'];
-        return Vimeo::create($values);
+        $delivery->status = isset($delivery->status) ?  $delivery->status : 0;
+        $vimeo = new Vimeo($values);
+        $delivery->vimeo()->save($vimeo);
+        return $delivery->vimeo;
     }
 
     /**
@@ -96,6 +98,7 @@ class VimeoController extends Controller
 
     public function getFieldValues($dot)
     {
+      $dot = array_dot($dot);
       $map = [
         'name'           => 'query.name',
         'description'    => 'query.description',
@@ -116,7 +119,9 @@ class VimeoController extends Controller
       $values = [];
 
       foreach ($map as $key => $value) {
-        array_set($values, $key, array_get($dot, $value));
+        $_value = array_get($dot, $value);
+        if (is_null($_value)) $_value = '';
+        array_set($values, $key, $_value);
       }
 
       return $values;

@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class StoreDeliveryRequest extends Request
+class StoreVimeoRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,7 @@ class StoreDeliveryRequest extends Request
     public function rules()
     {
         return [
-            'dipID'  => 'unique:deliveries',
-            'name'   => 'required',
-            'status' => 'required'
+            'deliveryID'  => 'unique:vimeo'
         ];
     }
 }

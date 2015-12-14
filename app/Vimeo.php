@@ -18,8 +18,31 @@ class Vimeo extends Model
    *
    * @var array
    */
-  protected $fillable = ['deliveryID', 'name', 'description', 'content_rating', 'rentActive', 'rentPeriod', 'rentPrice', 'buyActive', 'buyPrice', 'mainVideo', 'trailerVideo', 'poster', 'genres', 'tags'];
+  protected $fillable = [
+      'deliveryID',
+      'name',
+      'description',
+      'content_rating',
+      'rentActive',
+      'rentPeriod',
+      'rentPrice',
+      'buyActive',
+      'buyPrice',
+      'mainVideo',
+      'trailerVideo',
+      'poster',
+      'genres',
+      'tags'
+  ];
 
+  /**
+   * The validation rules.
+   *
+   * @var array
+   */
+  protected $rules = [
+      'name'  => 'unique:vimeo'
+  ];
   /**
    * The attributes excluded from the model's JSON form.
    *

@@ -123,6 +123,11 @@
               font-weight: bold;
             }
 
+            .event-list {
+                font-weight: 300;
+                font-size: 14px;
+            }
+
         </style>
     </head>
     <body>
