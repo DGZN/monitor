@@ -105,14 +105,14 @@ $(function(){
         var rows = []
         rows = data.map(function(delivery){
           switch (delivery.status) {
-            case 2:
+            case '2':
                 var status = 'Processing'
               break;
-            case 3:
+            case '3':
                 var status = 'Uploading'
                 var className = 'bg-info'
               break;
-            case 4:
+            case '4':
                 var status = 'Delivered'
                 var className = 'bg-success'
               break;
