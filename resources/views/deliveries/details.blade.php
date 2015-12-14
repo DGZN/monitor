@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'Giant Vimeo Deliver Dashboard')
+@section('title', 'Giant Vimeo Delivery Bot [Delivery Details]')
 
 @section('navbar')
 <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Giant Vimeo Delivery</a>
+      <a class="navbar-brand" href="#">Giant Vimeo Delivery Bot</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -56,7 +56,31 @@
           <hr>
           <ul class="list-group event-list">
             @foreach ($events as $event)
-              <li class="list-group-item">{{ $event['message'] }}</li>
+              @if ($payload = json_decode($event['payload'])) @endif
+              @if ($event['message'] == 'onDemand Page created')
+                <li class="list-group-item">
+                  <a href="https://vimeo.com/ondemand/{{$payload->pageID}}" target="_blank">
+                      <span class="glyphicon glyphicon-th-large pull-right" aria-hidden="true"></span>
+                  </a>
+                    {{ $event['message'] }}
+                </li>
+              @elseif ($event['message'] == 'Featured video uploaded successfully')
+                <li class="list-group-item">
+                  <a href="{{$payload->link}}" target="_blank">
+                      <span class="glyphicon glyphicon-th-large pull-right" aria-hidden="true"></span>
+                  </a>
+                    {{ $event['message'] }}
+                </li>
+              @elseif ($event['message'] == 'Trailer video uploaded successfully')
+                <li class="list-group-item">
+                  <a href="{{$payload->link}}" target="_blank">
+                      <span class="glyphicon glyphicon-th-large pull-right" aria-hidden="true"></span>
+                  </a>
+                    {{ $event['message'] }}
+                </li>
+              @else
+                <li class="list-group-item">{{ $event['message'] }}</li>
+              @endif
             @endforeach
           </ul>
         </div>

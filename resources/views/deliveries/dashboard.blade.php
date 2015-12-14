@@ -1,18 +1,17 @@
 @extends('layouts.master')
 
-@section('title', 'Giant Vimeo Deliver Dashboard')
+@section('title', 'Giant Vimeo Delivery Bot Dashboard')
 
 @section('navbar')
 <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Giant Vimeo Delivery</a>
+      <a class="navbar-brand" href="#">Giant Vimeo Delivery Bot</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-left api-routes">
-            <li><a href="/deliveries">Deliveries</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
