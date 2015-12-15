@@ -40,7 +40,7 @@
               <h4><span>Tags </span> <br> {{ $delivery->vimeo->tags() }}</h4>
               <h4><span>Featured</span> <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['mainVideo']) }}</h4>
               <h4><span>Trailer</span>  <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['trailerVideo'])}}</h4>
-              <h4><span>Feature Thumb</span>   <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['poster'])}}</h4>
+              <h4><span>Poster</span>   <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['poster'])}}</h4>
           </div>
           <div class="col-md-6">
             <h4><span> Renting </span> <br> {{ $delivery->vimeo['rentActive'] == 1 ? 'True' : 'False' }}</h4>
