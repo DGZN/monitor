@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Delivery extends Model
@@ -35,6 +36,22 @@ class Delivery extends Model
   public function byDipId($id)
   {
       return $this::where('dipID', '=', $id)->first();
+  }
+
+  /**
+   * Returns delivery progress.
+   *
+   * @return {string} void
+   */
+  public function progress()
+  {
+      $events  = $this->event->where('type', 'progress-event');
+      $started = new Carbon($events->first()->created_at);
+      $last    = new Carbon($events->last()->created_at);
+      $difference = $started->diff($last);
+      $duration = implode([$difference->h, $difference->i, $difference->s], ':');
+      $lastEvent = json_decode($events->last()['payload']);
+      return ['progress' => $lastEvent->progress, 'duration' => $duration];
   }
 
   /**

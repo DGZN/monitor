@@ -18,7 +18,7 @@ class Event extends Model
      *
      * @var array
      */
-    protected $fillable = ['dipID', 'message', 'payload'];
+    protected $fillable = ['dipID', 'type', 'message', 'payload'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -26,4 +26,15 @@ class Event extends Model
      * @var array
      */
     protected $hidden = [];
+
+
+    /**
+     * Returns proress events.
+     *
+     * @return {string} void
+     */
+    public function progress()
+    {
+        dd($this);
+    }
 }

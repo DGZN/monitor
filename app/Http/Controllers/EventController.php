@@ -43,11 +43,14 @@ class EventController extends Controller
         $event = $request->get('event');
         $delivery = (new Delivery)->byDipId($event['dipID']);
         if ($delivery) {
+            $eventType = 'delivery-event';
             if (isset($event['payload']['progress'])) {
               $delivery->progress = $event['payload']['progress'];
               $delivery->save();
+              $eventType = 'progress-event';
             }
             $event = new Event([
+                'type'    => $eventType,
                 'message' => $event['payload']['message'],
                 'payload' => json_encode($event['payload'])
             ]);
