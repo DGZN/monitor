@@ -103,7 +103,7 @@ $(function(){
     $.ajax({
       url: url + '/api/v1/deliveries/',
       success: function(data){
-        var i=1;
+        var i=0;
         var rows = []
         rows = data.map(function(delivery){
           switch (delivery.status) {
@@ -123,6 +123,7 @@ $(function(){
                 var className = ''
               break;
           }
+          i++
           return '<tr id="row2" style="cursor: pointer;" class="'+ className +'">    \
                 <td onclick="viewDetails('+delivery.id+')">'+i+'</td>                \
                 <td onclick="viewDetails('+delivery.id+')">'+delivery.dipID+'</td>   \
@@ -133,7 +134,6 @@ $(function(){
                     <i class="remove-icon" onclick="removeItem(this)" data-row="row2" data-id="'+delivery.id+'" data-resource="deliveries"></i> \
                 </td>                                                                \
             </tr>'
-          i++
         })
         $('#deliveries-body').html(rows)
       },
