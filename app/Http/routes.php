@@ -19,7 +19,7 @@ Route::group(['prefix' => 'api/v1'], function()
 {
   Route::resource('/deliveries/vimeo', 'VimeoController');
   Route::resource('/deliveries/events', 'EventController');
-  Route::get('deliveries/{id}/progresss', function($id){
+  Route::get('/deliveries/{id}/progress', function($id){
     return App\Delivery::find($id)->progress();
   });
   Route::resource('/deliveries', 'DeliveryController');
