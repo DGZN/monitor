@@ -46,6 +46,8 @@ class Delivery extends Model
   public function progress()
   {
       $events  = $this->event->where('type', 'progress-event');
+      if ($events->count() < 1)
+        return ['progress' => '0%', 'duration' => '0'];
       $started = new Carbon($events->first()->created_at);
       $last    = new Carbon($events->last()->created_at);
       $difference = $started->diff($last);
