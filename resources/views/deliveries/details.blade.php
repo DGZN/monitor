@@ -53,7 +53,7 @@
         <div class="form-group col-md-6 delivery-details">
           <h3>
             Events
-            <small class="pull-right text-s">Upload Time: {{ $delivery->progress()['duration'] }}</small>
+            <small class="pull-right text-s">Upload Time: <span class="upload-time"> {{ $delivery->progress()['duration'] }} </span> </small>
           </h3>
           <hr>
           <ul class="list-group event-list">
@@ -107,13 +107,14 @@ $(function(){
   var pollProgress = setInterval(pollDelivery, 1000)
   function pollDelivery(){
     $.ajax({
-      url: url + '/api/v1/deliveries/' + deliverID,
+      url: url + '/api/v1/deliveries/' + deliverID + '/progress',
       type: 'get',
       success: function(data){
-          if (data.progress !== $('.delivery-progress').html())
-            $('.delivery-progress').html(data.progress)
-          if (data.progress == '100%')
-            clearInterval(pollProgress)
+        if (data.progress !== $('.delivery-progress').html()) {
+          $('.delivery-progress').html(data.progress)
+          $('.upload-time').html(data.duration)
+        }
+        if (data.progress == '100%') clearInterval(pollProgress)
       }
     })
   }
