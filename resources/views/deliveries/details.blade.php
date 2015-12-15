@@ -30,7 +30,7 @@
   <div class="well delivery-details">
     <div class="row">
         <div class="form-group col-md-6 delivery-details">
-          <h3>{{ $delivery->vimeo['name'] }} <small>{{ $delivery->getStatus() }}</small> <small class="text-primary"> {{ $delivery->progress }} </small> </h3>
+          <h3>{{ $delivery->vimeo['name'] }} <small>{{ $delivery->getStatus() }}</small> <small class="text-primary delivery-progress"> {{ $delivery->progress }} </small> </h3>
           <hr>
           <h5>{{ $delivery->vimeo['description'] }}</h5>
           <hr>
@@ -98,4 +98,25 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('scripts')
+<script style="text/javascript">
+var deliverID = {{$delivery->id}}
+$(function(){
+  var pollProgress = setInterval(pollDelivery, 1000)
+  function pollDelivery(){
+    $.ajax({
+      url: url + '/api/v1/deliveries/' + deliverID,
+      type: 'get',
+      success: function(data){
+          if (data.progress !== $('.delivery-progress').html())
+            $('.delivery-progress').html(data.progress)
+          if (data.progress == '100%')
+            clearInterval(pollProgress)
+      }
+    })
+  }
+})
+</script>
 @endsection
