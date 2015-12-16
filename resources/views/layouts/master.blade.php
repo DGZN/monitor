@@ -161,7 +161,7 @@
     var path = location.href.split( '/' );
     var url = path[0] + '//' + path[2];
     function viewDetails(id){
-      window.location.href = '/admin/' + id
+      window.location.href = '/admin/deliveries/' + id
     }
     function processDelivery(id){
       console.log("processing delivery for", id);
