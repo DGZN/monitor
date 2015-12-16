@@ -37,9 +37,9 @@
           <div class="col-md-12">
               <h4><span>Featured</span> <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['mainVideo']) }}</h4>
               <h4><span>Trailer</span>  <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['trailerVideo'])}}</h4>
+              <h4><span>Poster</span>   <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['poster'])}}</h4>
           </div>
           <div class="col-md-4">
-            <h4><span>Poster</span>   <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['poster'])}}</h4>
             <h4><span>Rating </span> <br> {{ str_replace(',',', ',$delivery->vimeo->content_rating) }}</h4>
             <h4><span>Genres </span> <br> {{ $delivery->vimeo->genres() }}</h4>
             <h4><span>Tags </span> <br> {{ $delivery->vimeo->tags() }}</h4>
