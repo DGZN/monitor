@@ -32,20 +32,23 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-Route::get('deliveries', function(){
-  return view('deliveries.dashboard', [
-    'deliveries' => App\Delivery::all()
-  ]);
-});
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function ()
+{
+  Route::get('/', function() {
+    return view('deliveries.dashboard', [
+      'deliveries' => App\Delivery::all()
+    ]);
+  });
 
-Route::get('deliveries/{id}', function($id){
-  $delivery = App\Delivery::find($id);
-  $events = [];
-  if (!is_null($delivery->event)) {
-      $events = $delivery->event->toArray();
-  }
-  return view('deliveries.details', [
-    'delivery' => $delivery,
-    'events'   => $events
-  ]);
+  Route::get('deliveries/{id}', function($id){
+    $delivery = App\Delivery::find($id);
+    $events = [];
+    if (!is_null($delivery->event)) {
+        $events = $delivery->event->toArray();
+    }
+    return view('deliveries.details', [
+      'delivery' => $delivery,
+      'events'   => $events
+    ]);
+  });
 });

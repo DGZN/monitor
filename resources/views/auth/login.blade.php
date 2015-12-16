@@ -1,6 +1,6 @@
 @extends('auth.layouts.master-no-nav')
 
-@section('title', 'North Woods Admin Dashboard')
+@section('title', 'Giant Vimeo Delivery Bot [Login]')
 
 @section('content')
   <div class="container">
@@ -36,6 +36,16 @@
 
 @section('scripts')
 <script style="text/javascript">
-
+$(function(){
+  $(document).mousemove(function(e){
+     TweenLite.to($('body'),
+        .5,
+        { css:
+            {
+                backgroundPosition: ""+ parseInt(event.pageX/8) + "px "+parseInt(event.pageY/'12')+"px, "+parseInt(event.pageX/'15')+"px "+parseInt(event.pageY/'15')+"px, "+parseInt(event.pageX/'30')+"px "+parseInt(event.pageY/'30')+"px"
+            }
+        });
+  });
+});
 </script>
 @endsection

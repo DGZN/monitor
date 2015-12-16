@@ -1,6 +1,6 @@
 @extends('auth.layouts.master-no-nav')
 
-@section('title', 'North Woods Admin Dashboard')
+@section('title', 'Giant Vimeo Delivery Bot [Registraion]')
 
 @section('content')
   <div class="container">
