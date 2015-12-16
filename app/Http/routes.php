@@ -34,13 +34,13 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function ()
 {
-  Route::get('/', function() {
+  Route::get('deliveries', function() {
     return view('deliveries.dashboard', [
       'deliveries' => App\Delivery::all()
     ]);
   });
 
-  Route::get('admin/{id}', function($id){
+  Route::get('deliveries/{id}', function($id){
     $delivery = App\Delivery::find($id);
     $events = [];
     if (!is_null($delivery->event)) {
