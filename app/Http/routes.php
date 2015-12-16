@@ -34,6 +34,11 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function ()
 {
+
+  Route::get('/', function() {
+    return redirect('/deliveries');
+  });
+
   Route::get('deliveries', function() {
     return view('deliveries.dashboard', [
       'deliveries' => App\Delivery::all()
