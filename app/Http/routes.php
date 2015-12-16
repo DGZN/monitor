@@ -40,7 +40,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function ()
     ]);
   });
 
-  Route::get('deliveries/{id}', function($id){
+  Route::get('admin/{id}', function($id){
     $delivery = App\Delivery::find($id);
     $events = [];
     if (!is_null($delivery->event)) {
