@@ -35,16 +35,19 @@
           <h5>{{ $delivery->vimeo['description'] }}</h5>
           <hr>
           <div class="col-md-12">
-              <h4><span>Featured</span> <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['mainVideo']) }}</h4>
+              <h4><span>Feature</span> <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['mainVideo']) }}</h4>
+              <h4><span>Feature Thumb</span> <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['thumb']) }}</h4>
               <h4><span>Trailer</span>  <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['trailerVideo'])}}</h4>
-              <h4><span>Poster</span>   <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['poster'])}}</h4>
+              <h4><span>Trailer Thumb</span>  <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['trailerThumb'])}}</h4>
           </div>
           <div class="col-md-4">
+            <h4><span>Regions </span> <br> {{ str_replace(',',', ',$delivery->vimeo->regions) }}</h4>
             <h4><span>Rating </span> <br> {{ str_replace(',',', ',$delivery->vimeo->content_rating) }}</h4>
             <h4><span>Genres </span> <br> {{ $delivery->vimeo->genres() }}</h4>
             <h4><span>Tags </span> <br> {{ $delivery->vimeo->tags() }}</h4>
           </div>
           <div class="col-md-4">
+            <h4><span>Available Date</span> <br> {{ str_replace(',',', ',$delivery->vimeo->availDate) }}</h4>
             <h4><span> Renting </span> <br> {{ $delivery->vimeo['rentActive'] == 1 ? 'True' : 'False' }}</h4>
             <h4><span> Renting Period </span> <br> {{ $delivery->vimeo['rentPeriod'] }}</h4>
             <h4><span> Renting Price </span> <br> {{ $delivery->vimeo['rentPrice'] }}</h4>
@@ -70,7 +73,7 @@
                   </a>
                     {{ $event['message'] }}
                 </li>
-              @elseif ($event['message'] == 'Featured video uploaded successfully')
+              @elseif ($event['message'] == 'Feature video uploaded successfully')
                 <li class="list-group-item">
                   <a href="{{$payload->link}}" target="_blank">
                       <span class="glyphicon glyphicon-th-large pull-right" aria-hidden="true"></span>

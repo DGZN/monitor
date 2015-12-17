@@ -110,7 +110,11 @@ class VimeoController extends Controller
         'buyPrice'       => 'query.buy.price.USD',
         'mainVideo'      => 'attributes.path',
         'trailerVideo'   => 'attributes.trailer',
-        'poster'         => 'attributes.thumb',
+        'featureThumb'   => 'attributes.thumb',
+        'trailerThumb'   => 'attributes.trailerThumb',
+        'captions'       => 'attributes.subtitle',
+        'regions'        => 'attributes.regions',
+        'availDate'      => 'attributes.available',
         'genres'         => 'attributes.genres',
         'tags'           => 'attributes.tags',
         'id'             => 'attributes.id'

@@ -109,9 +109,13 @@
             }
 
             .delivery-details h4 {
-              font-weight: 300;
+              font-weight: bold;
               font-size: 16px;
               line-height: 25px;
+            }
+
+            .delivery-details h4 span{
+              font-weight: 300;
             }
 
             .delivery-details h5 {
@@ -119,7 +123,8 @@
               line-height: 16px;
             }
 
-            .delivery-details h4 span, h5 span {
+
+            .delivery-details h5 span {
               font-weight: bold;
             }
 

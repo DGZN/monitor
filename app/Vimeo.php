@@ -32,7 +32,12 @@ class Vimeo extends Model
       'trailerVideo',
       'poster',
       'genres',
-      'tags'
+      'tags',
+      'featureThumb',
+      'trailerThumb',
+      'captions'    ,
+      'regions'     ,
+      'availDate'
   ];
 
   /**
