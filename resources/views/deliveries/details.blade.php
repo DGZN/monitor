@@ -36,7 +36,7 @@
           <hr>
           <div class="col-md-12">
               <h4><span>Feature</span> <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['mainVideo']) }}</h4>
-              <h4><span>Feature Thumb</span> <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['thumb']) }}</h4>
+              <h4><span>Feature Thumb</span> <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['featureThumb']) }}</h4>
               <h4><span>Feature Captions</span>  <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['captions'])}}</h4>
               <h4><span>Trailer</span>  <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['trailerVideo'])}}</h4>
               <h4><span>Trailer Thumb</span>  <br> {{ str_replace(['watchme/','/mnt/smb/ampas/'],'',$delivery->vimeo['trailerThumb'])}}</h4>
