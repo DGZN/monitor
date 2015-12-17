@@ -48,12 +48,12 @@
           </div>
           <div class="col-md-4">
             <h4><span>Available Date</span> <br> {{ str_replace(',',', ',$delivery->vimeo->availDate) }}</h4>
-            <h4><span> Renting </span> <br> {{ $delivery->vimeo['rentActive'] == 1 ? 'True' : 'False' }}</h4>
+            <h4><span> Renting </span> <br> {{ $delivery->vimeo['rentActive'] == 1 ? 'Yes' : 'No' }}</h4>
             <h4><span> Renting Period </span> <br> {{ $delivery->vimeo['rentPeriod'] }}</h4>
             <h4><span> Renting Price </span> <br> {{ $delivery->vimeo['rentPrice'] }}</h4>
           </div>
           <div class="col-md-4">
-            <h4><span> Buying </span> <br> {{ $delivery->vimeo['buyActive'] == 1 ? 'True' : 'False' }}</h4>
+            <h4><span> Buying </span> <br> {{ $delivery->vimeo['buyActive'] == 1 ? 'Yes' : 'No' }}</h4>
             <h4><span> Buy Price: </span> <br> {{ $delivery->vimeo['buyPrice'] }}</h4>
           </div>
         </div>
