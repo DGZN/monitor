@@ -20,7 +20,7 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        return Delivery::all();
+        return Delivery::with('vimeo')->get();
     }
 
     /**

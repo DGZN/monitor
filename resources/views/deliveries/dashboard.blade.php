@@ -33,7 +33,7 @@
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Package ID</th>
+                      <th>Client</th>
                       <th>Name</th>
                       <th>Status</th>
                       <th>Progress</th>
@@ -44,7 +44,7 @@
                     @for ($i = 0; $i < count($deliveries); $i++)
                       <tr id="{{ 'row'.$i }}" style="cursor: pointer;" class="{{ $deliveries[$i]->getClass() }}">
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$i+1}}</td>
-                          <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->dipID}}</td>
+                          <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->vimeo->client}}</td>
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->name}}</td>
                           <td>
                             {{$deliveries[$i]->getStatus()}}
@@ -126,7 +126,7 @@ $(function(){
           i++
           return '<tr id="row2" style="cursor: pointer;" class="'+ className +'">    \
                 <td onclick="viewDetails('+delivery.id+')">'+i+'</td>                \
-                <td onclick="viewDetails('+delivery.id+')">'+delivery.dipID+'</td>   \
+                <td onclick="viewDetails('+delivery.id+')">'+delivery.vimeo.client+'</td>   \
                 <td onclick="viewDetails('+delivery.id+')">'+delivery.name+'</td>    \
                 <td>'+status+'</td>                                                  \
                 <td onclick="viewDetails('+delivery.id+')">'+delivery.progress+'</td>    \

@@ -117,7 +117,8 @@ class VimeoController extends Controller
         'availDate'      => 'attributes.available',
         'genres'         => 'attributes.genres',
         'tags'           => 'attributes.tags',
-        'id'             => 'attributes.id'
+        'id'             => 'attributes.id',
+        'client'         => 'attributes.client'
       ];
 
       $values = [];
