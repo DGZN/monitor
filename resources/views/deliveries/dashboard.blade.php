@@ -42,7 +42,7 @@
                   </thead>
                   <tbody id="deliveries-body">
                     @for ($i = 0; $i < count($deliveries); $i++)
-                      <tr id="{{ 'row'.$i }}" style="cursor: pointer;" class="{{ $deliveries[$i]->getClass() }}">
+                      <tr id="{{ 'row'.$i }}" style="cursor: pointer;" class="{{ $deliveries[$i]->getClass() OR '' }}">
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$i+1}}</td>
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->vimeo->client}}</td>
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->name}}</td>
