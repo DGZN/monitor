@@ -20,7 +20,7 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        return Delivery::with('vimeo')->get();
+        return Delivery::where('status', '<=', 4)->with('vimeo')->get();
     }
 
     /**

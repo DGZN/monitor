@@ -72,6 +72,14 @@
                 transform: rotate(-45deg);
             }
 
+            .archive-icon {
+                position: relative;
+                top: 3px;
+                font-size: 12px;
+                margin: 5px 5px 2px 25px;
+                color: #7cfc00;
+            }
+
             .add-item {
                 position: relative;
                 font-size: 12px;
@@ -169,7 +177,6 @@
       window.location.href = '/admin/deliveries/' + id
     }
     function processDelivery(id){
-      console.log("processing delivery for", id);
       $.ajax({
         url: url + '/api/v1/deliveries/' + id,
         type: 'patch',
@@ -240,6 +247,19 @@
         url: url + '/api/v1/' + resource + '/' + id,
         type: 'post',
         data: {_method: 'delete'},
+        success: function(data){
+          $('#'+row).remove()
+        }
+      })
+    }
+    function archiveItem(item){
+      var id = item.getAttribute("data-id")
+      var row = item.getAttribute("data-row")
+      var resource = item.getAttribute("data-resource")
+      $.ajax({
+        url: url + '/api/v1/' + resource + '/' + id,
+        type: 'put',
+        data: {status: 5},
         success: function(data){
           $('#'+row).remove()
         }

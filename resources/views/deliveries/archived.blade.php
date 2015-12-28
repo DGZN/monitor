@@ -12,7 +12,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-left api-routes">
-          <li><a href="/admin/deliveries/archived">Archived</a></li>
+          <li><a href="/admin/deliveries">Deliveries</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -57,12 +57,6 @@
                                  data-row="{{'row'.$i}}"
                                  data-id="{{$deliveries[$i]->id}}"
                                  data-resource="deliveries"></i>
-                               <i class="archive-icon"
-                                  onclick="archiveItem(this)"
-                                  data-row="{{'row'.$i}}"
-                                  data-id="{{$deliveries[$i]->id}}"
-                                  data-resource="deliveries">&#10004;</i>
-
                           </td>
                       </tr>
                     @endfor
@@ -108,26 +102,16 @@
 $(function(){
   function pollDeliveries(){
     $.ajax({
-      url: url + '/api/v1/deliveries/',
+      url: url + '/api/v1/deliveries/archived',
       success: function(data){
         var i=0;
         var rows = []
         rows = data.map(function(delivery){
+          console.log("STATUS", delivery.status);
           switch (delivery.status) {
-            case '2':
-                var status = 'Processing'
-              break;
-            case '3':
-                var status = 'Uploading'
-                var className = 'bg-info'
-              break;
-            case '4':
-                var status = 'Delivered'
-                var className = 'bg-success'
-              break;
             default:
-                var status = 'Pending'
-                var className = ''
+              var status = 'Archived'
+              var className = 'bg-success'
               break;
           }
           i++
@@ -138,8 +122,7 @@ $(function(){
                 <td>'+status+'</td>                                                  \
                 <td onclick="viewDetails('+delivery.id+')">'+delivery.progress+'</td>    \
                 <td>                                                                 \
-                    <i class="remove-icon"  onclick="removeItem(this)"  data-row="row2" data-id="'+delivery.id+'" data-resource="deliveries"></i> \
-                    <i class="archive-icon" onclick="archiveItem(this)" data-row="row2" data-id="'+delivery.id+'" data-resource="deliveries">&#10004;</i> \
+                    <i class="remove-icon" onclick="removeItem(this)" data-row="row2" data-id="'+delivery.id+'" data-resource="deliveries"></i> \
                 </td>                                                                \
             </tr>'
         })
@@ -148,20 +131,7 @@ $(function(){
       dataType: 'JSON'
     });
   }
-  setInterval(pollDeliveries, 1000)
-  /*
-  <tr id="row2" style="cursor: pointer;" class="bg-success">
-      <td onclick="viewDetails(171)">3</td>
-      <td onclick="viewDetails(171)">DGZN-Vimeo-Delivery03</td>
-      <td onclick="viewDetails(171)">Yet Another Test 1</td>
-      <td>
-        Delivered
-      </td>
-      <td>
-          <i class="remove-icon" onclick="removeItem(this)" data-row="row2" data-id="171" data-resource="deliveries"></i>
-      </td>
-  </tr>
-  */
+  setInterval(pollDeliveries, 10000)
 })
 </script>
 @endsection

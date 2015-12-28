@@ -22,6 +22,9 @@ Route::group(['prefix' => 'api/v1'], function()
   Route::get('/deliveries/{id}/progress', function($id){
     return App\Delivery::find($id)->progress();
   });
+  Route::get('/deliveries/archived', function(){
+    return App\Delivery::where('status', 5)->with('vimeo')->get();
+  });
   Route::resource('/deliveries', 'DeliveryController');
 });
 
@@ -35,9 +38,15 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function ()
 {
 
+  Route::get('deliveries/archived', function() {
+    return view('deliveries.archived', [
+      'deliveries' => App\Delivery::where('status', 5)->get()
+    ]);
+  });
+
   Route::get('deliveries', function() {
     return view('deliveries.dashboard', [
-      'deliveries' => App\Delivery::all()
+      'deliveries' => App\Delivery::where('status', '<=', 4)->with('vimeo')->get()
     ]);
   });
 
