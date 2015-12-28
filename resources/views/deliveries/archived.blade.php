@@ -131,7 +131,7 @@ $(function(){
       dataType: 'JSON'
     });
   }
-  setInterval(pollDeliveries, 10000)
+  //setInterval(pollDeliveries, 10000)
 })
 </script>
 @endsection
