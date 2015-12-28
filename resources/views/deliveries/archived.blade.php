@@ -43,7 +43,7 @@
                   </thead>
                   <tbody id="deliveries-body">
                     @for ($i = 0; $i < count($deliveries); $i++)
-                      <tr id="{{ 'row'.$i }}" style="cursor: pointer;" class="bg-primary">
+                      <tr id="{{ 'row'.$i }}" style="cursor: pointer;" class="bg-warning">
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$i+1}}</td>
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->vimeo->client}}</td>
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->name}}</td>
@@ -128,7 +128,7 @@ $(function(){
       dataType: 'JSON'
     });
   }
-  setInterval(pollDeliveries, 10000)
+  //setInterval(pollDeliveries, 10000)
 })
 </script>
 @endsection
