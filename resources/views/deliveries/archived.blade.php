@@ -43,11 +43,11 @@
                   </thead>
                   <tbody id="deliveries-body">
                     @for ($i = 0; $i < count($deliveries); $i++)
-                      <tr id="{{ 'row'.$i }}" style="cursor: pointer;" class="{{ $deliveries[$i]->getClass() OR '' }}">
+                      <tr id="{{ 'row'.$i }}" style="cursor: pointer;" class="bg-primary">
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$i+1}}</td>
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->vimeo->client}}</td>
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->name}}</td>
-                          <td class="bg-info">Archived</td>
+                          <td>Archived</td>
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->progress}}</td>
                           <td>
                               <i class="remove-icon"
