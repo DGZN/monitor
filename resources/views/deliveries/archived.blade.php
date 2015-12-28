@@ -47,9 +47,7 @@
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$i+1}}</td>
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->vimeo->client}}</td>
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->name}}</td>
-                          <td>
-                            {{$deliveries[$i]->getStatus()}}
-                          </td>
+                          <td class="bg-info">Archived</td>
                           <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->progress}}</td>
                           <td>
                               <i class="remove-icon"
@@ -107,7 +105,6 @@ $(function(){
         var i=0;
         var rows = []
         rows = data.map(function(delivery){
-          console.log("STATUS", delivery.status);
           switch (delivery.status) {
             default:
               var status = 'Archived'
@@ -131,7 +128,7 @@ $(function(){
       dataType: 'JSON'
     });
   }
-  //setInterval(pollDeliveries, 10000)
+  setInterval(pollDeliveries, 10000)
 })
 </script>
 @endsection
