@@ -44,17 +44,36 @@ class EventController extends Controller
         $delivery = (new Delivery)->byDipId($event['dipID']);
         if ($delivery) {
             $eventType = 'delivery-event';
-            if (isset($event['payload']['progress'])) {
-              $delivery->progress = $event['payload']['progress'];
+            if (isset($event['event']['task'])) {
+              $delivery->activeTask = $event['event']['task']['action'];
+              $payload = json_encode($event['event']);
+            } elseif (isset($event['event']['error'])) {
+              $eventType = 'delivery-error';
+              $payload = $event['event']['error'];
+              $delivery->status = 5;
+              $delivery->save();
+            } else {
+              $payload = json_encode($event['event']['list']);
+            }
+            if (isset($event['event']['progress'])) {
+              $delivery->progress = $event['event']['progress'];
+              $delivery->status = 3;
               $delivery->save();
               $eventType = 'progress-event';
             }
+            if ($event['event']['message'] == 'Completed action: texttrack') {
+              if ($delivery->status<5) {
+                $delivery->status = 4;
+                $delivery->save();
+              }
+            }
             $event = new Event([
                 'type'    => $eventType,
-                'message' => $event['payload']['message'],
-                'payload' => json_encode($event['payload'])
+                'message' => $event['event']['message'],
+                'payload' => $payload
             ]);
             $delivery->event()->save($event);
+            $delivery->save();
         }
         return $delivery;
     }

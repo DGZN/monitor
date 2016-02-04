@@ -29,7 +29,7 @@
 @section('content')
   <div class="well delivery-details">
     <div class="row">
-        <div class="form-group col-md-6 delivery-details">
+        <div class="form-group col-md-8 delivery-details">
           <h3>{{ $delivery->vimeo['name'] }} <small>{{ $delivery->getStatus() }}</small> <small class="text-primary delivery-progress"> {{ $delivery->progress }} </small> </h3>
           <hr>
           <h5>{{ $delivery->vimeo['description'] }}</h5>
@@ -58,7 +58,8 @@
             <h4><span> Buy Price: </span> <br> {{ $delivery->vimeo['buyPrice'] }}</h4>
           </div>
         </div>
-        <div class="form-group col-md-6 delivery-details">
+
+        <div class="form-group col-md-6 delivery-details" style="display:none;">
           <h3>
             Events
             <small class="pull-right text-s">Upload Time: <span class="upload-time"> {{ $delivery->progress()['duration'] }} </span> </small>
@@ -96,10 +97,51 @@
             @endforeach
           </ul>
         </div>
+
+        <div class="form-group col-md-4 delivery-details">
+          <h3>
+            Tasks
+            <small class="pull-right text-s">Upload Time: <span class="upload-time"> {{ $delivery->progress()['duration'] }} </span> </small>
+          </h3>
+          <hr>
+          <ul class="list-group event-list">
+            @foreach ($tasks as $action => $task)
+              @if (isset($task['error']))
+              <li class="list-group-item error">
+              @else
+              <li class="list-group-item {{ $task['status'] }}">
+              @endif
+                  <label>
+                    {{  $action }}
+                    @if ($task['action'])
+                      <br/>
+                      <span class="error-detail">
+                        {{ $task['error'] }}
+                      </span>
+                    @endif
+                  </label>
+                  @if (isset($task['link']))
+                    <a href="{{ $task['link'] }}" target="_blank">
+                      <span class="glyphicon glyphicon-th-large view-on-vimeo"></span>
+                    </a>
+                  @else
+                    @if (isset($task['error']))
+                    <span class="glyphicon glyphicon-alert delivery-error"></span>
+                    @else
+                    <span class="glyphicon glyphicon-ok {{ $task['status'] }}"></span>
+                    @endif
+                  @endif
+
+              </li>
+            @endforeach
+          </ul>
+        </div>
+
+
         <div class="col-md-12">
             @if ($delivery->getStatus() == 'Pending')
               <button type="submit" class="btn btn-primary pull-right" onclick="processDelivery({{$delivery->vimeo['deliveryID']}})">
-                <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span> Process
+                <span class="glyphicon glyphicon glyphicon-ok" aria-hidden="true"></span> Reprocess
               </button>
             @endif
         </div>

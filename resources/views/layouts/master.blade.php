@@ -141,6 +141,40 @@
                 font-size: 14px;
             }
 
+            .event-list label {
+              font-weight: 300 !important;
+              margin-bottom: 0px !important;
+            }
+
+            .event-list .glyphicon {
+              position: relative;
+              display: block;
+              float: right;
+              color: green;
+            }
+
+            .view-on-vimeo {
+              color: #337ab7 !important;
+            }
+
+            .delivery-error{
+              color: red !important;
+            }
+
+            .event-list .error {
+              background-color: #f2dede !important;
+            }
+
+            .error-detail {
+              position: relative;
+              font-size: 12px;
+              font-weight: bold;
+              color: red;
+              display: block;
+              margin-top: 8px;
+            }
+
+
         </style>
     </head>
     <body>
@@ -182,6 +216,7 @@
         type: 'patch',
         data:  {
           "status": 2
+        , "events": false
         },
         success: function(data){
           window.location.href = '/admin'
@@ -259,7 +294,7 @@
       $.ajax({
         url: url + '/api/v1/' + resource + '/' + id,
         type: 'put',
-        data: {status: 5},
+        data: {status: 6},
         success: function(data){
           $('#'+row).remove()
         }

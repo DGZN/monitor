@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Input;
 use App\Delivery;
 use App\Vimeo;
+use App\Event;
 use App\Http\Requests;
 use App\Http\Requests\StoreDeliveryRequest;
 use App\Http\Controllers\Controller;
@@ -20,7 +21,7 @@ class DeliveryController extends Controller
      */
     public function index()
     {
-        return Delivery::where('status', '<=', 4)->with('vimeo')->get();
+        return Delivery::where('status', '<=', 5)->with('vimeo')->get();
     }
 
     /**
@@ -76,6 +77,11 @@ class DeliveryController extends Controller
     public function update(Request $request, $id)
     {
       $delivery = (new Delivery)->find($id)->update($request->all());
+      if ($request->get('events')) {
+        Event::where('deliveryID','=',$id)->delete();
+        $delivery->activeTask = 'Pending';
+        $delivery->save();
+      }
       return Delivery::find($id);
     }
 
@@ -93,6 +99,7 @@ class DeliveryController extends Controller
         }
         $vimeo    = $delivery->vimeo;
         Vimeo::destroy($vimeo['id']);
+        Event::where('deliveryID','=',$id)->delete();
         return Delivery::destroy($delivery['id']);
     }
 }

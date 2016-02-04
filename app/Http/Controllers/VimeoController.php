@@ -100,6 +100,7 @@ class VimeoController extends Controller
     {
       $dot = array_dot($dot);
       $map = [
+        'file'           => 'attributes.file',
         'name'           => 'query.name',
         'description'    => 'query.description',
         'content_rating' => 'query.content_rating',

@@ -20,6 +20,7 @@ class Vimeo extends Model
    */
   protected $fillable = [
       'deliveryID',
+      'file',
       'client',
       'name',
       'description',

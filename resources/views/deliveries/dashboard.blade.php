@@ -42,30 +42,32 @@
                     </tr>
                   </thead>
                   <tbody id="deliveries-body">
-                    @for ($i = 0; $i < count($deliveries); $i++)
-                      <tr id="{{ 'row'.$i }}" style="cursor: pointer;" class="{{ $deliveries[$i]->getClass() OR '' }}">
-                          <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$i+1}}</td>
-                          <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->vimeo->client}}</td>
-                          <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->name}}</td>
-                          <td>
-                            {{$deliveries[$i]->getStatus()}}
-                          </td>
-                          <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->progress}}</td>
-                          <td>
-                              <i class="remove-icon"
-                                 onclick="removeItem(this)"
-                                 data-row="{{'row'.$i}}"
-                                 data-id="{{$deliveries[$i]->id}}"
-                                 data-resource="deliveries"></i>
-                               <i class="archive-icon"
-                                  onclick="archiveItem(this)"
-                                  data-row="{{'row'.$i}}"
-                                  data-id="{{$deliveries[$i]->id}}"
-                                  data-resource="deliveries">&#10004;</i>
+                    @if (isset($deliveries))
+                      @for ($i = 0; $i < count($deliveries); $i++)
+                        <tr id="{{ 'row'.$i }}" style="cursor: pointer;" class="{{ $deliveries[$i]->getClass() OR '' }}">
+                            <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$i+1}}</td>
+                            <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->vimeo->client}}</td>
+                            <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->name}}</td>
+                            <td>
+                              {{$deliveries[$i]->getStatus()}}
+                            </td>
+                            <td onclick="viewDetails({{$deliveries[$i]->id}})" >{{$deliveries[$i]->progress}}</td>
+                            <td>
+                                <i class="remove-icon"
+                                   onclick="removeItem(this)"
+                                   data-row="{{'row'.$i}}"
+                                   data-id="{{$deliveries[$i]->id}}"
+                                   data-resource="deliveries"></i>
+                                 <i class="archive-icon"
+                                    onclick="archiveItem(this)"
+                                    data-row="{{'row'.$i}}"
+                                    data-id="{{$deliveries[$i]->id}}"
+                                    data-resource="deliveries">&#10004;</i>
 
-                          </td>
-                      </tr>
-                    @endfor
+                            </td>
+                        </tr>
+                      @endfor
+                  @endif
                   </tbody>
               </table>
             </div>
@@ -125,6 +127,10 @@ $(function(){
                 var status = 'Delivered'
                 var className = 'bg-success'
               break;
+            case '5':
+                var status = 'Error'
+                var className = 'bg-danger'
+              break;
             default:
                 var status = 'Pending'
                 var className = ''
@@ -135,7 +141,7 @@ $(function(){
                 <td onclick="viewDetails('+delivery.id+')">'+i+'</td>                \
                 <td onclick="viewDetails('+delivery.id+')">'+delivery.vimeo.client+'</td>   \
                 <td onclick="viewDetails('+delivery.id+')">'+delivery.name+'</td>    \
-                <td>'+status+'</td>                                                  \
+                <td>'+taskName(delivery.activeTask)+'</td>                                                  \
                 <td onclick="viewDetails('+delivery.id+')">'+delivery.progress+'</td>    \
                 <td>                                                                 \
                     <i class="remove-icon"  onclick="removeItem(this)"  data-row="row2" data-id="'+delivery.id+'" data-resource="deliveries"></i> \
@@ -163,5 +169,16 @@ $(function(){
   </tr>
   */
 })
+
+function taskName(str){
+  var name = 'Processing ' + ucFirst(str)
+  if (str.indexOf('upload')>=0)
+    var name = 'Uploding ' + ucFirst(str.replace('upload',''))
+  return name;
+}
+
+function ucFirst(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 </script>
 @endsection
