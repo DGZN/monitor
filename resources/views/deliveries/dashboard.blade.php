@@ -33,12 +33,12 @@
               <table class="table table-hover">
                   <thead>
                     <tr>
-                      <th>#</th>
-                      <th>Client</th>
-                      <th>Name</th>
-                      <th>Status</th>
-                      <th>Progress</th>
-                      <th>Actions</th>
+                      <th style="width: 3%;"></th>
+                      <th style="width: 7%;"></th>
+                      <th style="width: 10%;"></th>
+                      <th style="width: 20%;"></th>
+                      <th style="width: 53%;"></th>
+                      <th style="width: 5%;"></th>
                     </tr>
                   </thead>
                   <tbody id="deliveries-body">
@@ -136,13 +136,19 @@ $(function(){
                 var className = ''
               break;
           }
+          var progress = '<div class="progress">                                                                                                                     \
+            <div class="progress-bar" role="progressbar" aria-valuenow="'+delivery.progress+'" aria-valuemin="0" aria-valuemax="100" style="width: '+delivery.progress+'%;">            \
+            </div>                                                                                                                                                   \
+          </div>'
+          if (delivery.status > 3)
+            progress = ''
           i++
           return '<tr id="row2" style="cursor: pointer;" class="'+ className +'">    \
                 <td onclick="viewDetails('+delivery.id+')">'+i+'</td>                \
                 <td onclick="viewDetails('+delivery.id+')">'+delivery.vimeo.client+'</td>   \
                 <td onclick="viewDetails('+delivery.id+')">'+delivery.name+'</td>    \
                 <td>'+taskName(delivery.activeTask)+'</td>                                                  \
-                <td onclick="viewDetails('+delivery.id+')">'+delivery.progress+'</td>    \
+                <td onclick="viewDetails('+delivery.id+')">'+progress+'</td>    \
                 <td>                                                                 \
                     <i class="remove-icon"  onclick="removeItem(this)"  data-row="row2" data-id="'+delivery.id+'" data-resource="deliveries"></i> \
                     <i class="archive-icon" onclick="archiveItem(this)" data-row="row2" data-id="'+delivery.id+'" data-resource="deliveries">&#10004;</i> \
@@ -155,19 +161,6 @@ $(function(){
     });
   }
   setInterval(pollDeliveries, 1000)
-  /*
-  <tr id="row2" style="cursor: pointer;" class="bg-success">
-      <td onclick="viewDetails(171)">3</td>
-      <td onclick="viewDetails(171)">DGZN-Vimeo-Delivery03</td>
-      <td onclick="viewDetails(171)">Yet Another Test 1</td>
-      <td>
-        Delivered
-      </td>
-      <td>
-          <i class="remove-icon" onclick="removeItem(this)" data-row="row2" data-id="171" data-resource="deliveries"></i>
-      </td>
-  </tr>
-  */
 })
 
 function taskName(str){

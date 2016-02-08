@@ -174,6 +174,10 @@
               margin-top: 8px;
             }
 
+            .progress {
+              margin-bottom: 0px !important;
+            }
+
 
         </style>
     </head>
