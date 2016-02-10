@@ -35,9 +35,9 @@
                     <tr>
                       <th style="width: 3%;"></th>
                       <th style="width: 7%;"></th>
-                      <th style="width: 10%;"></th>
+                      <th style="width: 15%;"></th>
                       <th style="width: 20%;"></th>
-                      <th style="width: 53%;"></th>
+                      <th style="width: 50%;"></th>
                       <th style="width: 5%;"></th>
                     </tr>
                   </thead>
