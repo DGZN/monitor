@@ -136,9 +136,10 @@ $(function(){
                 var className = ''
               break;
           }
-          var progress = '<div class="progress">                                                                                                                     \
+          var progress = '<div class="progress">                                                                                                                                        \
             <div class="progress-bar" role="progressbar" aria-valuenow="'+delivery.progress+'" aria-valuemin="0" aria-valuemax="100" style="width: '+delivery.progress+'%;">            \
-            </div>                                                                                                                                                   \
+            '+delivery.progress+'%                                                                                                                                                      \
+            </div>                                                                                                                                                                      \
           </div>'
           if (delivery.status > 3)
             progress = ''
