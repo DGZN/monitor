@@ -141,14 +141,17 @@ $(function(){
             '+delivery.progress+'%                                                                                                                                                      \
             </div>                                                                                                                                                                      \
           </div>'
-          if (delivery.status > 3)
+          var status = taskName(delivery.activeTask)
+          if (delivery.status > 3) {
+            status = 'Delivered'
             progress = ''
+          }
           i++
           return '<tr id="row2" style="cursor: pointer;" class="'+ className +'">    \
                 <td onclick="viewDetails('+delivery.id+')">'+i+'</td>                \
                 <td onclick="viewDetails('+delivery.id+')">'+delivery.vimeo.client+'</td>   \
                 <td onclick="viewDetails('+delivery.id+')">'+delivery.name+'</td>    \
-                <td>'+taskName(delivery.activeTask)+'</td>                                                  \
+                <td>'+status+'</td>                                                  \
                 <td onclick="viewDetails('+delivery.id+')">'+progress+'</td>    \
                 <td>                                                                 \
                     <i class="remove-icon"  onclick="removeItem(this)"  data-row="row2" data-id="'+delivery.id+'" data-resource="deliveries"></i> \
